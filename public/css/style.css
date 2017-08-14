@@ -1,0 +1,614 @@
+/* ################### */
+/*    COLOR PALETTE    */
+/*    BLACK: #171717   */
+/*    RED: #e74c3c     */
+/*  DARK RED: #c1280a  */
+/*  LIGHT GREY: #e6e6e6  */
+/* ################### */
+
+/* ---------------------------------- */
+/* BASIC SETUP */
+/* ---------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+}
+
+.clearfix {zoom: 1}
+.clearfix:after {
+    content: '.';
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.half-width {
+    width: 50%;
+    margin: 0 auto;
+}
+
+/* ---------------------------------- */
+/* REUSABLE COMPONENTS */
+/* ---------------------------------- */
+
+.row {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.box {
+    padding: 1%;
+}
+
+section {
+    padding: 80px 0;
+}
+
+/* ------- HEADINGS -------- */
+h1,
+h2,
+h3 {
+  
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 240%; 
+    word-spacing: 2px;
+}
+
+h2 {
+    font-size: 180%;
+    word-spacing: 2px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h3 {
+    font-size: 110%;
+    margin-bottom: 15px;
+}
+
+h2:after {
+    display: block;
+    height: 2px;
+    background-color: #e74c3c;
+    content: " ";
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+/* ------- PARAGRAPHS -------- */
+
+.long-copy {
+    line-height: 145%;
+    width: 70%;
+    margin-left: 15%;
+}
+
+.box p {
+    font-size: 90%;
+    line-height: 145%;
+}
+
+.text-centered {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.centered-div {
+    margin-left: 40%;
+}
+
+/* ------- ICONS -------- */
+
+.icon-big {
+    font-size: 350%;
+    display: block;
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.icon-small {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    color: #e74c3c;
+    font-size: 120%;
+    /*secrets to align text and icons*/
+    line-height: 120%;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+
+/* ------- LINKS -------- */
+
+a:link,
+a:visited {
+    color: #fff;
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #c1280a;
+    transition: border-bottom 0.2s, color 0.2s;
+}
+
+a:hover,
+a:active {
+    color: #dfdfdf;
+    border-bottom: 1px solid transparent;
+}
+
+/* ------- BUTTONS -------- */
+
+.btn:link, 
+.btn:visited,
+input[type=submit]{
+    display: inline-block;
+    padding: 10px 30px;
+    font-weight: 300;
+    text-decoration: none;
+    border-radius: 200px;
+    color: #fff;
+    transition:  background-color 0.2s, border 0.2s, color 0.2s;
+}
+
+.btn-full:link,
+.btn-full:visited,
+input[type=submit]{
+    background-color: #e74c3c;
+    border: 1px solid #e74c3c;
+    margin-right: 15px;
+
+}
+
+.btn-ghost:link,
+.btn-ghost:visited {
+    border: 1px solid #e74c3c;
+    color: #e67e22;
+}
+
+.btn:hover,
+.btn:active,
+input[type=submit]:hover,
+input[type=submit]:active {
+    background-color: #c1280a;
+}
+
+.btn-full:hover,
+.btn-full:active {
+    border: 1px solid #c1280a;
+}
+
+.btn-ghost:hover,
+.btn-ghost:active {
+    border: 1px solid #c1280a;
+    color: #fff;
+}
+
+/* ------- DROPDOWN -------- */
+
+/* Dropdown Button */
+.dropbtn {
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.45);
+    min-width: 160px;
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover { background-color: rgba(0, 0, 0, 0.05);}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+/* ------- SPACERS -------- */
+
+.horizontal-spacer-100 {
+    width: 500px;
+}
+
+.vertical-spacer-75 {
+    height: 75px;
+}
+
+.vertical-spacer-50 {
+    height: 50px;
+}
+
+.vertical-spacer-25 {
+    height: 25px;    
+}
+
+/* ---------------------------------- */
+/* NAV BAR */
+/* ---------------------------------- */
+
+nav {
+    background-color: rgba(0, 0, 0, 0.45);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.nav-bar-logo {
+    padding-left: 3%;
+}
+
+.nav-btn {
+    border: none;
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Lato', 'Arial', sans-serif;
+    padding-bottom: 7px;
+}
+
+.nav-btn:link,
+.nav-btn:visited {
+    color: #fff;
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 1px solid #c1280a;
+    transition: border-bottom 0.2s, color 0.2s;
+}
+
+.nav-btn:hover,
+.nav-btn:active {
+    color: #dfdfdf;
+    border-bottom: 1px solid transparent;
+}
+
+.main-nav li .nav-btn:link,
+.main-nav la .nav-btn:visited {
+    padding: 8px 0;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+    
+}
+
+.main-nav li .nav-btn:hover,
+.main-nav li .nav-btn:active {
+    border-bottom: 2px solid #c1280a; 
+}
+
+.main-nav {
+    float: right;
+    list-style: none;
+    margin-top: 25px;
+    padding-right: 3%;
+}
+
+.main-nav li {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.main-nav li a:link,
+.main-nav la a:visited {
+    padding: 8px 0;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+    
+}
+
+.main-nav li a:hover,
+.main-nav li a:active {
+    border-bottom: 2px solid #c1280a; 
+}
+
+/* MOBILE NAVI */
+
+.mobile-nav-icon {
+    float: right;
+    margin-top: 30px;
+    margin-right: 30px;
+    cursor: pointer;
+    display: none;
+}
+
+.mobile-nav-icon i {
+    font-size: 200%;
+    color: white;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.logo-black {
+    height: 50px;
+    width: auto;
+    float: left;
+    margin: 5px 0;
+    display: none;
+}
+
+/* ---------------------------------- */
+/* MAIN PAGE */
+/* ---------------------------------- */
+
+.main-slide {
+    overflow: hidden;
+}
+
+.main-slide div {
+    background-color: black;
+    overflow: hidden;
+}
+
+.main-slide div img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    object-fit: cover;
+}
+
+/* ---------------------------------- */
+/* ABOUT */
+/* ---------------------------------- */
+
+.person-info {
+        padding-top: 20px;
+}
+
+
+.headshot-div {
+    text-align: right;
+}
+
+.headshot {
+    height: 100px;
+    border-radius: 50%;
+}
+
+/* ---------------------------------- */
+/* GALLERY */
+/* ---------------------------------- */
+
+.gallery-image-wrapper {
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.gallery-image-wrapper img {
+    border-radius: 5px;
+    width: 90%;
+    margin: auto 0;
+}
+
+.gallery-section .row .span-1-of-3 {
+    padding: 0;
+    margin: 0 0 40px 0;
+    border-radius: 5px;
+
+}
+
+.gallery-row {
+    display:flex; 
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ---------------------------------- */
+/* CONTACT */
+/* ---------------------------------- */
+
+input[type=text],
+input[type=email] {
+    width: 100%;
+}
+
+fieldset {
+    border: none;
+}
+
+legend {
+    padding-bottom: 20px;
+}
+
+legend:after {
+    display: block;
+    height: 2px;
+    background-color: #e74c3c;
+    content: " ";
+    width: 80px;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+textarea {
+    width: 90%;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.form-item-title {
+    padding-bottom: 20px;
+}
+
+.form-item-title:after {
+    display: block;
+    height: 2px;
+    background-color: #e74c3c;
+    content: " ";
+    width: 80px;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.submit-button {
+    width: 170px;
+    height: 50px;
+    border-radius: 40px;
+    border: none;
+    box-shadow: none;
+    background-color: white;
+    border: 1px solid #e74c3c;
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #e7e7e7;
+}
+
+/* ---------------------------------- */
+/* FOOTER */
+/* ---------------------------------- */
+
+footer {
+    background-color: #222222;
+    padding: 30px 45px;
+    font-size: 80%;
+    
+}
+
+.footer-nav {
+    list-style: none;
+    float: left;
+}
+
+.social-icons {
+    list-style: none;
+    float: right;
+}
+
+.footer-nav li,
+.social-icons li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+
+.footer-nav li:last-child,
+.social-icons li:last-child {
+    margin-right: 0;
+}
+
+.footer-nav li a:link,
+.footer-nav li a:visited,
+.social-icons li a:link,
+.social-icons li a:visited {
+    text-decoration: none;
+    border: 0;
+    color: #fff;
+    transition: color 0.2s;
+    
+}
+
+.footer-nav li a:hover,
+.footer-nav li a:active
+ {
+    color: #ddd;
+}
+
+.social-icons li a:link,
+.social-icons li a:visited {
+    font-size: 160%;
+}
+
+.ion-social-facebook,
+.ion-social-twitter,
+.ion-social-googleplus,
+.ion-social-instagram {
+    transition: color 0.2s;
+}
+
+.ion-social-facebook:hover,
+.ion-social-facebook:active {
+    color: #3b5998;
+}
+.ion-social-twitter:hover,
+.ion-social-twitter:active {
+    color: #00aced;
+}
+.ion-social-googleplus:hover,
+.ion-social-googleplus:active {
+    color: #dd4b39;
+}
+.ion-social-instagram:hover,
+.ion-social-instagram:active {
+    color: #517fa4;
+}
+
+footer p {
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 70%;
+}
+
+.designed-by a {
+    border: none;
+}
+
+.designed-by a img {
+    height: 50px;
+}

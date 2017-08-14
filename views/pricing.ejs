@@ -1,0 +1,22 @@
+<% include partials/header %>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>
+<% pricing.forEach(function(priceGroup) { %>
+    <h2><%= priceGroup.label %></h2>
+    <% priceGroup.prices.forEach(function(price) { %>
+        <div class="row text-centered">
+            <div class="col span-1-of-3">
+                <%= price.type %>
+            </div>
+            <div class="col span-1-of-3">
+                <%= price.time  %>
+            </div>
+            <div class="col span-1-of-3 price-div">
+                <%= price.price %>
+            </div>
+        </div>
+    <% }) %>
+    <div class="vertical-spacer-50"></div>
+<% }) %>
+<div class="vertical-spacer-75"></div>
+<% include partials/footer %>

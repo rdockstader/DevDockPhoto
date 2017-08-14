@@ -1,0 +1,20 @@
+<% include partials/header %>
+<section class="gallery-section">
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>
+<div class="row">
+    <h2><%= title %></h2>
+</div>
+<div class="row gallery-row">
+    <% images.forEach(function(image) { %>
+        <div class="col span-1-of-3">
+            <div class="gallery-image-wrapper">
+                <!--<a class="model-lanuch" href="#">-->
+                    <img src="/img/gallery/<%= image.path %>" alt="<%= image.alt %>">
+                <!--</a>-->
+            </div>
+        </div>
+    <% }) %>
+</div>
+</section>
+<% include partials/footer %>

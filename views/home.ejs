@@ -1,0 +1,7 @@
+<% include partials/header %>
+<div class="main-slide">
+    <% backgrounds.forEach(function(background) { %>
+    <div><img src="/img/main-page/<%= background.name %>" alt="<%= background.alt %>"> </div>
+    <% }) %>
+</div>
+<% include partials/footer %>
