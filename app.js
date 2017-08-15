@@ -131,7 +131,18 @@ app.get("/portraits", function(req, res) {
         {path: "portraits/kelson-min.jpg", alt: "Kelson"},
         {path: "portraits/ryan-min.jpg", alt: "Ryan"},
         {path: "portraits/sam-min.jpg", alt: "Sam"},
-        {path: "portraits/trevor-min.jpg", alt: "Trevor"}
+        {path: "portraits/trevor-min.jpg", alt: "Trevor"},
+        {path: "portraits/P03.jpg", alt: "p03"},
+        {path: "portraits/P06.jpg", alt: "p06"},
+        {path: "portraits/P07.jpg", alt: "p07"},
+        {path: "portraits/P09.jpg", alt: "p09"},
+        {path: "portraits/P10.jpg", alt: "p10"},
+        {path: "portraits/P17.jpg", alt: "p17"},
+        {path: "portraits/P19.jpg", alt: "p19"},
+        {path: "portraits/P21.jpg", alt: "p21"},
+        {path: "portraits/P25.jpg", alt: "p25"},
+        {path: "portraits/P26.jpg", alt: "p26"},
+        {path: "portraits/P29.jpg", alt: "p29"}
     ];
    
    
@@ -162,7 +173,15 @@ app.get("/family", function(req, res) {
         {path: "family/DSC_1034-min.jpg", alt: "19th picture"},
         {path: "family/DSC_1047-min.jpg", alt: "20th picture"},
         {path: "family/DSC_1086-min.jpg", alt: "21st picture"},
-        {path: "family/DSC_1104-min.jpg", alt: "22th picture"}
+        {path: "family/DSC_1104-min.jpg", alt: "22th picture"},
+        {path: "family/F17.jpg", alt: "23rd picture"},
+        {path: "family/F18.jpg", alt: "24rd picture"},
+        {path: "family/F21.jpg", alt: "25rd picture"},
+        {path: "family/F22.jpg", alt: "26rd picture"},
+        {path: "family/F24.jpg", alt: "27rd picture"},
+        {path: "family/F27.jpg", alt: "28rd picture"},
+        {path: "family/F28.jpg", alt: "29rd picture"},
+        {path: "family/F29.jpg", alt: "30rd picture"}
     ];
    res.render("gallery", {title: title, images: images}); 
 });
