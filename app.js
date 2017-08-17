@@ -1,4 +1,5 @@
-var methodOverride  = require("method-override"),
+var fileUpload      = require("express-fileupload"),
+    methodOverride  = require("method-override"),
     bodyParser      = require("body-parser"),
     nodemailer      = require('nodemailer'),
     mongoose        = require('mongoose'),
@@ -14,6 +15,7 @@ app.use(express.static(/*__dirname +*/ "public"));
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/dev_dock_photo", {useMongoClient: true});
 app.use(methodOverride("_method"));
+app.use(fileUpload());
 
 
 //seedDB();
@@ -173,7 +175,7 @@ app.get("/admin/gallery", function(req, res) {
 //Gallery Create
 app.post("/admin/gallery", function(req, res){
     // create Collection
-   Collection.create({title: capitalizeFirstLetter(req.body.title), titleLower: req.body.title.toLowerCase()}, function(err, newBlog) {
+   Collection.create({title: capitalizeFirstLetter(req.body.title), titleLower: req.body.title.toLowerCase()}, function(err, newCollection) {
         if(err) {
             res.render("/admin/gallery/new", {galleryList: galleryList});
         } else {
@@ -189,7 +191,7 @@ app.get("/admin/gallery/new", function(req, res) {
     res.render("admin/gallery/new", {galleryList: galleryList});
 });
 
-// Edit Gallery -- TODO
+// Edit Gallery
 app.get("/admin/gallery/:id/edit", function(req, res) {
     Collection.findById(req.params.id, function(err, foundCollection) {
        if(err) {
@@ -200,7 +202,7 @@ app.get("/admin/gallery/:id/edit", function(req, res) {
     });
 });
 
-// Update Gallery -- TODO
+// Update Gallery
 app.put("/admin/gallery/:id", function(req, res) {
     Collection.findByIdAndUpdate(req.params.id, {title: capitalizeFirstLetter(req.body.title), titleLower: req.body.title.toLowerCase()}, function(err, updatedCollection) {
        if(err) {
@@ -214,7 +216,6 @@ app.put("/admin/gallery/:id", function(req, res) {
 
 // Destory Gallery
 app.delete("/admin/gallery/:id", function(req, res) {
-   //destroy blog
    Collection.findByIdAndRemove(req.params.id, function(err) {
        if(err) {
            res.redirect("/admin/gallery");
@@ -232,10 +233,57 @@ app.get("/admin/gallery/:title", function(req, res) {
               console.log(err);
               res.redirect("/admin");
           } else {
+              //console.log("got here");
               res.render("admin/gallery/index", {collections: allCollections, thisCollection: req.params.title, galleryList: galleryList});
           }
       });
 });
+
+// Photo Pages
+// ====================
+
+// Photo Create
+app.post("/admin/gallery/:galleryId/photos", function(req, res) {
+    //console.log(req.params.galleryId);
+    Collection.findById(req.params.galleryId, function(err, col){
+        if(err) {
+            console.log(err);
+        }
+        //Save To Database
+        //console.log(req.body);
+        var path = col.titleLower + "/" + req.body.title;
+        col.images.push({path: path, title: req.body.title, alt: req.body.alt, showOnHome: req.body.showOnHome}); 
+        col.save();
+        //Save to File Structure
+        //console.log(req.files);
+        var newFile = req.files.newPhoto;
+        if(newFile) {
+            newFile.mv(__dirname + "/public/img/gallery/" + path, function(err) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log("File Uploaded!");
+                }
+            });    
+        }
+        // Send to Gallery page
+        res.redirect("/admin/gallery/" + col.titleLower);
+        //res.send("file uploaded");
+    });
+});
+
+
+// Photo Add
+app.get("/admin/gallery/:galleryId/photos/new", function(req, res) {
+    res.render("admin/photos/new", {galleryId: req.params.galleryId, galleryList: galleryList });  
+});
+
+
+// Photo Update
+
+// Photo edit
+
+// Photo Destory
 
 // ====================
 // End Admin Pages

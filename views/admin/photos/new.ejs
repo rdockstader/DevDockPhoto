@@ -1,0 +1,42 @@
+<% include ../../partials/header %>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>
+<div class="row text-centered">
+    <h2>Add New Photo</h2>
+</div>
+<div class="row text-centered">
+    <form ref="uploadForm" id="uploadForm" method="POST" action="/admin/gallery/<%= galleryId %>/photos" encType="multipart/form-data">
+        <div class="row">
+            <div class="col span-1-of-3">
+                <h4>Photo Title</h4>
+            </div>
+            <div class="col span-2-of-3">
+                <input type="text" id="photoTitle" name="title" placeholder="Example.jpg">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col span-1-of-3">
+                <h4>Photo Alt</h4>
+            </div>
+            <div class="col span-2-of-3">
+                <input type="text" id="photoAlt" name="alt" placeholder="Example Photo">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col span-1-of-3">
+                <h4>Show On Home</h4>
+            </div>
+            <div class="col span-2-of-3 text-left">
+                <input type="checkbox" id="photoShowOnHome" name="showOnHome">
+            </div>
+        </div>
+        <div class="row">
+            <input type="file" name="newPhoto">
+        </div>
+        <div class="vertical-spacer-75"></div>
+        <button type="submit" id="contact-submit" class="submit-button">Submit</button>
+    </form>
+</div>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>            
+<% include ../../partials/footer %>

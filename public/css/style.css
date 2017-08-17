@@ -780,6 +780,16 @@ footer p {
     border: 1px solid #337ab7;
 }
 
+.photo-add a {
+    background-color: #2e9913;
+    border: 1px solid #2e9913;
+}
+
+.photo-add a:hover {
+    background-color: #1c6d0a;
+    border: 1px solid #1c6d0a;
+}
+
 .photo-update,
 .photo-delete {
     color: slategrey;
@@ -798,4 +808,12 @@ footer p {
 .photo-delete:hover {
     color: lightgrey;
     border: none;
+}
+
+.ion-android-checkbox-outline {
+    color: green;
+}
+
+.ion-android-checkbox-outline-blank {
+    color: red;
 }

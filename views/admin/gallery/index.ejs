@@ -2,7 +2,7 @@
 <div class="vertical-spacer-75"></div>
 <div class="vertical-spacer-75"></div>
 <div class="row text-centered">
-    <h2>Gallery Administration</h2>
+    <h2>Gallery Administration (<%= thisCollection %>)</h2>
 </div>
 <div class="row">
     <div class="col span-1-of-4 text-centered">
@@ -40,7 +40,11 @@
                 <%= image.alt %>
             </div>
             <div class="col span-2-of-12">
-                <%= image.showOnHome %>
+                <% if(image.showOnHome){ %>
+                    <i class="ion-android-checkbox-outline"></i>
+                <% } else { %>
+                    <i class="ion-android-checkbox-outline-blank"></i>
+                <% } %>
             </div>
             <div class="col span-1-of-12">
                 <a class="photo-update" href="#"><i class="ion-android-document"></i></a>
@@ -52,6 +56,7 @@
         <% }) %>
         <div class="row align-right">
             <div class="category-mod">
+                
                 <div class="category-delete">
                     <form id="delete" action="/admin/gallery/<%= collection._id %>?_method=DELETE" method="POST">
                         <button class="btn">Delete Category</button>
@@ -59,6 +64,9 @@
                 </div> 
                 <div class="category-update">
                     <a class="btn" href="/admin/gallery/<%= collection._id %>/edit">Update Category</a>
+                </div>
+                <div class="photo-add">
+                    <a class="btn" href="/admin/gallery/<%= collection._id %>/photos/new">Add Photo</a>
                 </div>
             </div>
         </div>
