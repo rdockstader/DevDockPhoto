@@ -35,8 +35,9 @@
                         <div class="dropdown">
                             <button onclick="dropDownGallery()" class="dropbtn nav-btn">Gallery</button>
                             <div id="Gallery-drop-down" class="dropdown-content">
-                                <a href="/portraits">Portraits</a>
-                                <a href="/family">Family</a>
+                                <% galleryList.forEach(function(item) { %>
+                                <a href="/gallery/<%= item.toLowerCase() %>"><%= item %></a>
+                                <% }); %>
                             </div>
                         </div>
                     </li>

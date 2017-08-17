@@ -1,0 +1,70 @@
+<% include ../../partials/header %>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>
+<div class="row text-centered">
+    <h2>Gallery Administration</h2>
+</div>
+<div class="row">
+    <div class="col span-1-of-4 text-centered">
+        <ul class="collections-list">
+            <li><a class="add-collection-btn" href="/admin/home">back</a></li>
+            <% collections.forEach(function(collection) {  %>
+                <li><a class="collections-btn" href="/admin/gallery/<%= collection.titleLower %>"><%= collection.title %></a></li>
+            <% }) %>
+            <li><a class="add-collection-btn" href="/admin/gallery/new">+</a></li>
+        </ul>
+    </div>
+    <div class="col span-3-of-4 text-centered">
+        <% if(thisCollection === "none"){  %>
+        <h3>No Collection Seleted</h3>
+        <% } else { %>
+        <div class="row gallery-header">
+            <div class="col span-4-of-12">
+                <p><strong>Title</strong></p>
+            </div>
+            <div class="col span-4-of-12">
+                <p><strong>Alt</strong></p>
+            </div>
+            <div class="col span-2-of-12">
+                <p><strong>Home</strong></p>
+            </div>
+        </div>
+        <% collections.forEach(function(collection) {  %>
+        <% if(thisCollection === collection.titleLower) { %>
+        <% collection.images.forEach(function(image) {  %>
+        <div class="row">
+            <div class="col span-4-of-12">
+                <%= image.title %>
+            </div>
+            <div class="col span-4-of-12">
+                <%= image.alt %>
+            </div>
+            <div class="col span-2-of-12">
+                <%= image.showOnHome %>
+            </div>
+            <div class="col span-1-of-12">
+                <a class="photo-update" href="#"><i class="ion-android-document"></i></a>
+            </div>
+            <div class="col span-1-of-12">
+                <a class="photo-delete" href="#"><i class="ion-ios-trash"></i></a>
+            </div>
+        </div>
+        <% }) %>
+        <div class="row align-right">
+            <div class="category-mod">
+                <div class="category-delete">
+                    <form id="delete" action="/admin/gallery/<%= collection._id %>?_method=DELETE" method="POST">
+                        <button class="btn">Delete Category</button>
+                    </form>
+                </div> 
+                <div class="category-update">
+                    <a class="btn" href="/admin/gallery/<%= collection._id %>/edit">Update Category</a>
+                </div>
+            </div>
+        </div>
+        <% } }) }  %>
+    </div>
+</div>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>            
+<% include ../../partials/footer %>

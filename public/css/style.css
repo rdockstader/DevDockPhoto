@@ -123,8 +123,16 @@ h2:after {
     text-align: left;
 }
 
+.text-right {
+    text-align: right;
+}
+
 .centered-div {
     margin-left: 40%;
+}
+
+.float-left {
+    float: left !important;
 }
 
 /* ------- ICONS -------- */
@@ -460,7 +468,8 @@ nav {
 /* ---------------------------------- */
 
 input[type=text],
-input[type=email] {
+input[type=email],
+input[type=password]{
     width: 100%;
 }
 
@@ -611,4 +620,182 @@ footer p {
 
 .designed-by a img {
     height: 50px;
+}
+
+
+/* ---------------------------------- */
+/* ADMIN HOME */
+/* ---------------------------------- */
+
+.admin-nav li .admin-btn:link,
+.admin-nav li .admin-btn:visited {
+    padding: 8px 0;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+    
+}
+
+.admin-nav li .admin-btn:hover,
+.adminmain-nav li .admin-btn:active {
+    border-bottom: 2px solid #c1280a; 
+}
+
+.admin-nav {
+    list-style: none;
+    margin-top: 25px;
+    padding-right: 3%;
+}
+
+.admin-nav li {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.admin-nav li a:link,
+.admin-nav li a:visited {
+    padding: 8px 0;
+    color: grey;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+    
+}
+
+.admin-nav li a:hover,
+.admin-nav li a:active {
+    border-bottom: 2px solid #c1280a; 
+}
+
+/* ---------------------------------- */
+/* ADMIN GALLERY */
+/* ---------------------------------- */
+
+.collections-list {
+    list-style: none;
+}
+
+.collections-list li {
+    width: 100%;
+    border: 1px solid white;
+    background-color: green;
+    border-radius: 5px;
+    padding-top: 5px;
+    height: 40px;
+}
+
+.collections-list li:first-of-type {
+    width: 100%;
+    border: 1px solid white;
+    background-color: #5bc0de;
+    border-radius: 5px;
+    padding-top: 5px;
+    height: 40px;
+}
+
+.collections-list li:last-of-type {
+    width: 100%;
+    border: 1px solid white;
+    background-color: #c7c8c3;
+    border-radius: 5px;
+    padding-top: 5px;
+    height: 40px;
+}
+
+.collections-btn {
+    height: 20px;
+    color: white;
+    border: none;
+    
+}
+
+.collections-btn:hover,
+.collections-btn:link,
+.collections-btn:visited{
+    border: none;
+}
+
+.add-collection-btn {
+    height: 20px;
+    color: white;
+    border: none;
+
+    
+}
+
+.add-collection-btn:hover,
+.add-collection-btn:link,
+.add-collection-btn:visited{
+    border: none;
+}
+
+.gallery-header div p{
+    text-transform: uppercase;
+}
+
+.gallery-header div p:after {
+    display: block;
+    height: 2px;
+    background-color: #e74c3c;
+    content: " ";
+    width: 50px;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+.category-mod {
+    margin-top: 50px;
+     
+}
+
+
+.category-mod div a,
+.category-mod div button{
+    width: 225px;
+    float:right;
+    margin-left: 20px;
+     
+}
+
+.category-delete button {
+    background-color: red;
+    height: 45px;
+    color: white;
+    border-radius: 50px;
+    border: none;
+}
+
+.category-update a {
+    background-color: #5bc0de;
+    border: 1px solid #5bc0de;
+}
+
+.category-update a:hover {
+    background-color: #337ab7;
+    border: 1px solid #337ab7;
+}
+
+.photo-update,
+.photo-delete {
+    color: slategrey;
+    border: none;
+}
+
+.photo-update:link,
+.photo-delete:link,
+.photo-update:active,
+.photo-delete:active{
+    color: slategrey;
+    border: none;
+}
+
+.photo-update:hover,
+.photo-delete:hover {
+    color: lightgrey;
+    border: none;
 }
