@@ -1,0 +1,39 @@
+<% include ../../partials/header %>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>
+<div class="row text-centered">
+    <h2>Modify Photo</h2>
+</div>
+<div class="row text-centered">
+    <form ref="updatePhotoForm" id="updatePhotoForm" method="POST" action="/admin/gallery/<%= galleryId %>/photos/<%= photo._id %>?_method=PUT">
+        <div class="row">
+            <div class="col span-1-of-3">
+                <h4>Photo Title</h4>
+            </div>
+            <div class="col span-2-of-3">
+                <input type="text" id="photoTitle" name="photo[title]" value="<%= photo.title %>" readonly>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col span-1-of-3">
+                <h4>Photo Alt</h4>
+            </div>
+            <div class="col span-2-of-3">
+                <input type="text" id="photoAlt" name="photo[alt]" value="<%= photo.alt %>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col span-1-of-3">
+                <h4>Show On Home</h4>
+            </div>
+            <div class="col span-2-of-3 text-left">
+                <input type="checkbox" id="photoShowOnHome" name="photo[showOnHome]" value="TRUE" <% if(photo.showOnHome){ %>checked <% } %> >
+            </div>
+        </div>
+        <div class="vertical-spacer-75"></div>
+        <button type="submit" id="contact-submit" class="submit-button">Submit</button>
+    </form>
+</div>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>            
+<% include ../../partials/footer %>

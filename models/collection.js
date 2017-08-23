@@ -4,13 +4,11 @@ var collectionSchema = new mongoose.Schema({
     title: {type: String},
     titleLower: {type: String},
     images: [
-        {
-            path: String,
-            title: String,
-            alt: String,
-            showOnHome: Boolean
-        }
-    ]
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Photo"
+      }
+   ]
 });
 
 module.exports = mongoose.model("Collection", collectionSchema);

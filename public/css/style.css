@@ -794,6 +794,7 @@ footer p {
 .photo-delete {
     color: slategrey;
     border: none;
+    background: none;
 }
 
 .photo-update:link,
@@ -805,7 +806,9 @@ footer p {
 }
 
 .photo-update:hover,
-.photo-delete:hover {
+.photo-delete:hover,
+.photo-update:visited,
+.photo-delete:visited {
     color: lightgrey;
     border: none;
 }
