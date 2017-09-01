@@ -18,7 +18,7 @@ var fileUpload      = require("express-fileupload"),
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(/*__dirname +*/ "public"));
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/dev_dock_photo", {useMongoClient: true});
+mongoose.connect("mongodb://herokuLogin:J1OMFqB2Vja0@ds119064.mlab.com:19064/dev_dock_photo", {useMongoClient: true});
 app.use(methodOverride("_method"));
 app.use(fileUpload());
 
