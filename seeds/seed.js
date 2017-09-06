@@ -170,8 +170,8 @@ function seedDB(){
             console.log("users removed");
         }
     });
-     var newUser = new User({username: "test", isAdmin: true});
-    User.register(newUser, "password", function(err, user){
+     var newUser = new User({username: "devin", isAdmin: true});
+    User.register(newUser, "Th3Ph0t0Sh0pm@st3r", function(err, user){
         if(err){
             console.log(err);
         } else {
