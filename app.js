@@ -391,7 +391,7 @@ app.post("/admin/gallery/:galleryId/photos", isLoggedIn, function(req, res) {
         var localFilePath;
         var newFile = req.files.newPhoto;
         if(newFile) {
-            var dir = __dirname + "/public/img/gallery/" + col.titleLower;
+            var dir = __dirname + "/public/img/gallery/temp";
             if(!fs.existsSync(dir)) {
                 fs.mkdirSync(dir);
             }
