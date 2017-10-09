@@ -170,8 +170,9 @@ function seedDB(){
             console.log("users removed");
         }
     });
+    // Prod Pass = Th3Ph0t0Sh0pm@st3r
      var newUser = new User({username: "devin", isAdmin: true});
-    User.register(newUser, "Th3Ph0t0Sh0pm@st3r", function(err, user){
+    User.register(newUser, "pass", function(err, user){
         if(err){
             console.log(err);
         } else {

@@ -1,3 +1,4 @@
+// Require Libraries
 var fileUpload      = require("express-fileupload"),
     methodOverride  = require("method-override"),
     bodyParser      = require("body-parser"),
@@ -5,20 +6,28 @@ var fileUpload      = require("express-fileupload"),
     mongoose        = require('mongoose'),
     passport        = require("passport"),
     LocalStrategy   = require("passport-local"),
+    AWS             = require("aws-sdk"),
     express         = require("express"),
+    path            = require("path"),
     fs              = require("fs"),
-    app             = express(),
-    PriceGroup      = require("./models/priceGroup"),
+    app             = express();
+    
+// Require Database Models    
+var PriceGroup      = require("./models/priceGroup"),
     Collection      = require("./models/collection"),
     Photo           = require("./models/photo"),
-    User            = require("./models/user"),
-    seedDB          = require("./seeds/seed");
+    User            = require("./models/user");
+    
+
 
 // Application Config
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(/*__dirname +*/ "public"));
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://herokuLogin:J1OMFqB2Vja0@ds119064.mlab.com:19064/dev_dock_photo", {useMongoClient: true});
+// Test database
+mongoose.connect("mongodb://localhost/dev_dock_photo", {useMongoClient: true});
+// Live Database
+//mongoose.connect("mongodb://herokuLogin:J1OMFqB2Vja0@ds119064.mlab.com:19064/dev_dock_photo", {useMongoClient: true});
 app.use(methodOverride("_method"));
 app.use(fileUpload());
 
@@ -34,10 +43,57 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//AWS configuration
+var bucketName = 'rdd-test-bucket';
+var photoBucket = new AWS.S3({params: {Bucket: bucketName}});
+
+
+//require Seed
+// var seedDB          = require("./seeds/seed");
+
 // Create test user
 // seedDB();
 
-// Helper Functions
+
+
+//  *************** Helper Functions ***************** //
+// AWS Functions
+function uploadToAWS(file, key, callback) {
+    //console.log("In uploadtoAWS function");
+    var awsFileLocation = "";
+    var uploadParams = {Key: key, Body: ""};
+    var fileStream = fs.createReadStream(file);
+    fileStream.on('error', function(err){
+        console.log("file error", err); 
+    });
+    uploadParams.Body = fileStream;
+    
+    photoBucket.upload(uploadParams, function (err, data) {
+        if(err) {
+            console.log("Error occured uploading to AWS: " + err);
+        } else {
+            console.log("Upload successful: " + data.Location);
+        }
+    });
+    awsFileLocation = "https://" + bucketName + ".s3.amazonaws.com/" + key;
+    console.log("finishing with return of " + awsFileLocation);
+    callback(awsFileLocation);
+    
+}
+function deleteFromAWS(key) {
+    console.log("AWS Key: " + key);
+    var params = { Key: key };
+    photoBucket.deleteObject(params, function(err, data) {
+        if (err) {
+            console.log(err, err.stack);  // error
+        }
+        else {
+            console.log("file deleted from AWS"); // deleted
+        }
+    });
+}
+
+// Other Functions
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
@@ -265,10 +321,12 @@ app.put("/admin/gallery/:id", isLoggedIn, function(req, res) {
 
 // Destory Gallery
 app.delete("/admin/gallery/:id", isLoggedIn, function(req, res) {
+    
     Collection.findById(req.params.id, function(err, col){
         if(err) {
             console.log(err);
         } else {
+            //remove from Database and Local Filesystem
             col.images.forEach(function(image) {
                 Photo.findByIdAndRemove(image._id, function(err){
                     if(err) {
@@ -324,38 +382,40 @@ app.post("/admin/gallery/:galleryId/photos", isLoggedIn, function(req, res) {
         if(err) {
             console.log(err);
         }
-        //Save To Database
-        //console.log(req.body);
+        //Save to File Structure
         var path = col.titleLower + "/" + req.body.title;
-        // Create Photo
-        Photo.create({path: path, title: req.body.title, alt: req.body.alt, showOnHome: req.body.showOnHome}, function(err, photo){
+        //console.log(req.files);
+        var localFilePath
+        var newFile = req.files.newPhoto;
+        if(newFile) {
+            var dir = __dirname + "/public/img/gallery/" + col.titleLower;
+            if(!fs.existsSync(dir)) {
+                fs.mkdirSync(dir);
+            }
+            localFilePath = __dirname + "/public/img/gallery/" + path;
+            newFile.mv(localFilePath, function(err) {
+                if(err) {
+                    console.log(err);
+                } else {
+                    console.log("File Uploaded!");
+                }
+            });    
+        }
+        //Save to s3
+        uploadToAWS(localFilePath, path, function(AWSpath) {
+            Photo.create({path: AWSpath, title: req.body.title, alt: req.body.alt, key: path, showOnHome: req.body.showOnHome}, function(err, photo){
             if(err) {
                 console.log(err);
             } else {
                 col.images.push(photo); 
                 col.save();
                 
-                //Save to File Structure
-                //console.log(req.files);
-                var newFile = req.files.newPhoto;
-                if(newFile) {
-                    var dir = __dirname + "/public/img/gallery/" + col.titleLower;
-                    if(!fs.existsSync(dir)) {
-                        fs.mkdirSync(dir);
-                    }
-                    newFile.mv(__dirname + "/public/img/gallery/" + path, function(err) {
-                        if(err) {
-                            console.log(err);
-                        } else {
-                            console.log("File Uploaded!");
-                        }
-                    });    
-                }
+
                 // Send to Gallery page
                 res.redirect("/admin/gallery/" + col.titleLower);
                 //res.send("file uploaded");  
             }
-        });
+        })});
         
     });
 });
@@ -407,26 +467,23 @@ app.put("/admin/gallery/:galleryId/photos/:id", isLoggedIn, function(req, res){
 app.delete("/admin/gallery/:galleryId/photos/:id", isLoggedIn, function(req, res){
     var photoPath = "";
     var photoId = "";
+    // Locate photo for destruction
     Photo.findById((req.params.id), function(err, photo){
         if(err){
             console.log(err);
         } else {
             photoPath = photo.path;
             photoId = photo._id;
+            deleteFromAWS(photo.key);
         }
     });
+    // Remove from AWS s3
+    // Remove from local FS and database
     Photo.findByIdAndRemove(req.params.id, function(err){
         if(err) {
             console.log(err);
         } else {
             console.log("photo removed");
-            fs.unlink(__dirname + "/public/img/gallery/" + photoPath, function(err){
-                if(err) {
-                    console.log(err);
-                } else {
-                    console.log("photo file removed");
-                }
-            });
             Collection.findById(req.params.galleryId, function(err, col){
                 if(err) {
                     console.log(err);

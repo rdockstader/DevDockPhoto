@@ -4,6 +4,7 @@ var photoSchema = new mongoose.Schema({
     path: String,
     title: String,
     alt: String,
+    key: String,
     showOnHome: Boolean
 });
 
