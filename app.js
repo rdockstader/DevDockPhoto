@@ -395,7 +395,7 @@ app.post("/admin/gallery/:galleryId/photos", isLoggedIn, function(req, res) {
             if(!fs.existsSync(dir)) {
                 fs.mkdirSync(dir);
             }
-            localFilePath = __dirname + "/public/img/gallery/" + path;
+            localFilePath = __dirname + "/public/img/gallery/temp/" + req.body.title;
             newFile.mv(localFilePath, function(err) {
                 if(err) {
                     console.log(err);
