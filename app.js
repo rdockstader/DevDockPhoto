@@ -44,7 +44,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 //AWS configuration
-var bucketName = 'rdd-test-bucket';
+var bucketName = 'dev-dock-photo';
 var photoBucket = new AWS.S3({params: {Bucket: bucketName}});
 
 
