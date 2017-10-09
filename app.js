@@ -25,9 +25,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(/*__dirname +*/ "public"));
 mongoose.Promise = global.Promise;
 // Test database
-mongoose.connect("mongodb://localhost/dev_dock_photo", {useMongoClient: true});
+//mongoose.connect("mongodb://localhost/dev_dock_photo", {useMongoClient: true});
 // Live Database
-//mongoose.connect("mongodb://herokuLogin:J1OMFqB2Vja0@ds119064.mlab.com:19064/dev_dock_photo", {useMongoClient: true});
+mongoose.connect("mongodb://herokuLogin:J1OMFqB2Vja0@ds119064.mlab.com:19064/dev_dock_photo", {useMongoClient: true});
 app.use(methodOverride("_method"));
 app.use(fileUpload());
 
@@ -383,9 +383,12 @@ app.post("/admin/gallery/:galleryId/photos", isLoggedIn, function(req, res) {
             console.log(err);
         }
         //Save to File Structure
+        req.body.title = req.files.newPhoto.name;
+        req.body.alt = req.body.title.replace(/\.[^/.]+$/, "");
+        console.log("Filename: " + req.body.title);
         var path = col.titleLower + "/" + req.body.title;
         //console.log(req.files);
-        var localFilePath
+        var localFilePath;
         var newFile = req.files.newPhoto;
         if(newFile) {
             var dir = __dirname + "/public/img/gallery/" + col.titleLower;
