@@ -68,15 +68,6 @@ app.use("/admin", adminRoutes);
 app.use("/admin/gallery", adminGalleryRoutes);
 app.use("/admin/gallery/:galleryId/photos", adminPhotoRoutes);
 
-// ====================
-// Begin Admin Pages
-// ====================
-
-// ====================
-// End Admin Pages
-// ====================
-
-
 //catch all other requests
 app.get("*", function(req, res) {
     res.render("error", {});
