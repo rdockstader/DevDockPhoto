@@ -48,11 +48,9 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//require Seed
-// var seedDB          = require("./seeds/seed");
-
-// Create test user
-// seedDB();
+//Seed Database (with test user)
+/* var seedDB = require("./seeds/seed");
+seedDB(); // */
 
 app.locals.galleryList = middleware.getGalleryList();
 

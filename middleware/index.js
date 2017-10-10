@@ -4,14 +4,11 @@ var AWS             = require("aws-sdk"),
 
 var middlewareObj = {};
 
-//AWS configuration
+//Production Bucket
 //var bucketName = 'dev-dock-photo';
-var bucketName = 'rdd-test-bucket';
+var bucketName = process.env.BUCKET_NAME;
 var photoBucket = new AWS.S3({params: {Bucket: bucketName}});
 
-
-//  *************** Helper Functions ***************** //
-// AWS Functions
 middlewareObj.uploadToAWS = function(file, key, callback) {
     //console.log("In uploadtoAWS function");
     var awsFileLocation = "";
@@ -48,7 +45,6 @@ middlewareObj.deleteFromAWS = function(key) {
     });
 };
 
-// Other Functions
 middlewareObj.capitalizeFirstLetter = function(string) {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 };
