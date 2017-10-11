@@ -111,9 +111,17 @@ router.delete("/:id", middleware.isLoggedIn, function(req, res){
                     console.log(err);
                 } else {
                     //Remove from array
-                    var indexOfPhoto = col.images.findIndex(i => i._id === photoId);
-                    col.images.splice(indexOfPhoto, 1);
-                    console.log("photo removed from collection");
+                    var indexOfPhoto = col.images.indexOf(photoId);
+                    //console.log("photo index: " + indexOfPhoto);
+                    //console.log("Expected ID to remove: " + photoId);
+                    //console.log("Images before splice: " + col.images);
+                    if(indexOfPhoto >= 0) {
+                        col.images.splice(indexOfPhoto, 1); 
+                        console.log("photo removed from collection");
+                    } else {
+                        console.log("Image not found. Not removing from collection.");
+                    }
+                    //console.log("Images after splice: " + col.images);
                     col.save();
                     res.redirect("/admin/gallery/" + col.titleLower);
                 }
