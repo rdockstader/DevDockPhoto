@@ -5,7 +5,8 @@ var photoSchema = new mongoose.Schema({
     title: String,
     alt: String,
     key: String,
-    showOnHome: Boolean
+    showOnHome: Boolean,
+   addDate: {type: Date}
 });
 
 module.exports = mongoose.model("Photo", photoSchema);

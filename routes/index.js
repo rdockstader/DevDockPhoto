@@ -80,7 +80,8 @@ router.get("/pricing", function(req, res) {
 
 //Gallery Pages
 router.get("/gallery/:titleLC", function(req, res) {
-   Collection.findOne({titleLower: req.params.titleLC }).populate("images").exec(function(err, col) {
+    var sorter= {addDate: -1};    
+    Collection.findOne({titleLower: req.params.titleLC }).populate({path: "images", options: {sort: sorter}}).exec(function(err, col) {
        if(err) {
            console.log(err);
        } else {

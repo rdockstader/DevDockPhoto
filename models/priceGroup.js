@@ -9,7 +9,8 @@ var priceGroupSchema = new mongoose.Schema({
             time: String,
             price: String
         }
-    ]
+    ],
+   addDate: {type: Date}
 });
 
 module.exports = mongoose.model("PriceGroup", priceGroupSchema);

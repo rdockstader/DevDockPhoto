@@ -34,7 +34,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
         }
         //Save to s3
         middleware.uploadToAWS(localFilePath, path, function(AWSpath) {
-            Photo.create({path: AWSpath, title: req.body.title, alt: req.body.alt, key: path, showOnHome: req.body.showOnHome}, function(err, photo){
+            Photo.create({path: AWSpath, title: req.body.title, alt: req.body.alt, key: path, showOnHome: req.body.showOnHome, addDate: new Date()}, function(err, photo){
             if(err) {
                 console.log(err);
             } else {

@@ -50,8 +50,9 @@ middlewareObj.capitalizeFirstLetter = function(string) {
 };
 
 middlewareObj.getGalleryList = function() {
+    var sorter = {order: 1};
     var headerGalleryList = [];
-    Collection.find({}, 'title', function(err, allCollections) {
+    Collection.find({}, 'title').sort(sorter).exec(function(err, allCollections) {
        if(err) {
            console.log(err);
        } else {

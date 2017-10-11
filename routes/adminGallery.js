@@ -23,7 +23,7 @@ router.get("/", middleware.isLoggedIn, function(req, res) {
 //Gallery Create
 router.post("/", middleware.isLoggedIn, function(req, res){
     // create Collection
-   Collection.create({title: middleware.capitalizeFirstLetter(req.body.title), titleLower: req.body.title.toLowerCase()}, function(err, newCollection) {
+   Collection.create({title: middleware.capitalizeFirstLetter(req.body.title), titleLower: req.body.title.toLowerCase(), addDate: new Date(), order: req.body.order}, function(err, newCollection) {
         if(err) {
             res.render("/admin/gallery/new", {});
         } else {
@@ -53,7 +53,7 @@ router.get("/:id/edit", middleware.isLoggedIn, function(req, res) {
 
 // Update Gallery
 router.put("/:id", middleware.isLoggedIn, function(req, res) {
-    Collection.findByIdAndUpdate(req.params.id, {title: middleware.capitalizeFirstLetter(req.body.title), titleLower: req.body.title.toLowerCase()}, function(err, updatedCollection) {
+    Collection.findByIdAndUpdate(req.params.id, {title: middleware.capitalizeFirstLetter(req.body.title), titleLower: req.body.title.toLowerCase(), order: req.body.order}, function(err, updatedCollection) {
        if(err) {
            res.redirect("/admin/gallery");
        } else {

@@ -7,14 +7,20 @@
 <div class="row text-centered">
     <form method="POST" action="/admin/gallery/<%= collection._id %>?_method=PUT">
         <div class="col span-1-of-3">
-                <h4>Collection Name</h4>
-            </div>
-            <div class="col span-2-of-3">
-                <input type="text"id="userName" name="title" value="<%= collection.title %>" readonly>
-            </div>
-            <div class="vertical-spacer-75"></div>
-            <div class="vertical-spacer-75"></div>
-            <button type="submit" id="contact-submit" class="submit-button">Submit</button>
+            <h4>Collection Name</h4>
+        </div>
+        <div class="col span-2-of-3">
+            <input type="text"id="userName" name="title" value="<%= collection.title %>" readonly>
+        </div>
+        <div class="col span-1-of-3">
+            <h4>Order</h4>
+        </div>
+        <div class="col span-2-of-3">
+             <input type="number" name="order" value="<%= collection.order %>" min="1" max="20">
+        </div>
+        <div class="vertical-spacer-75"></div>
+        <div class="vertical-spacer-75"></div>
+        <button type="submit" id="contact-submit" class="submit-button">Submit</button>
     </form>
 </div>
 <div class="vertical-spacer-75"></div>
