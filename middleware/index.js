@@ -1,6 +1,7 @@
 var AWS             = require("aws-sdk"),
     fs              = require("fs"),
-    Collection      = require("../models/collection");
+    Collection      = require("../models/collection"),
+    PriceGroup      = require("../models/priceGroup");
 
 var middlewareObj = {};
 
@@ -63,6 +64,23 @@ middlewareObj.getGalleryList = function() {
    });
    //console.log("Ran this code");
    return headerGalleryList;
+};
+
+middlewareObj.getPriceGroupList = function() {
+    var sorter = {order: 1};
+    var priceGroupList = [];
+    PriceGroup.find({}, 'label').sort(sorter).exec(function(err, allPriceGroups) {
+        if(err) {
+            console.log(err);
+        } else {
+            allPriceGroups.forEach(function(pg){
+                //console.log(pg);
+                priceGroupList.push(pg.label);
+            });
+        }
+    });
+    //console.log("Price Group List updated: " + priceGroupList);
+    return priceGroupList;
 };
 
 middlewareObj.isLoggedIn = function(req, res, next){

@@ -1,0 +1,28 @@
+<% include ../../partials/header %>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>
+<div class="row text-centered">
+    <h2>Edit <%= priceGroup.label %> Price Group</h2>
+</div>
+<div class="row text-centered">
+    <form method="POST" action="/admin/pricegroups/<%= priceGroup._id %>?_method=PUT">
+        <div class="col span-1-of-3">
+            <h4>Price Group Label</h4>
+        </div>
+        <div class="col span-2-of-3">
+            <input type="text" id="label" name="label" value="<%= priceGroup.label %>">
+        </div>
+        <div class="col span-1-of-3">
+            <h4>Order</h4>
+        </div>
+        <div class="col span-2-of-3">
+             <input type="number" name="order" value="<%= priceGroup.order %>" min="1" max="20">
+        </div>
+        <div class="vertical-spacer-75"></div>
+        <div class="vertical-spacer-75"></div>
+        <button type="submit" id="contact-submit" class="submit-button">Submit</button>
+    </form>
+</div>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>            
+<% include ../../partials/footer %>

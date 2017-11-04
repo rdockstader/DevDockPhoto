@@ -9,7 +9,7 @@
                 <h4>Username</h4>
             </div>
             <div class="col span-2-of-3">
-                <input type="text" name="username" placeholder="username">
+                <input type="text" name="username" placeholder="username" id="username">
             </div>
         </div>
         <div class="vertical-spacer-25"></div>
@@ -26,5 +26,10 @@
     </form>
 </div>
 <div class="vertical-spacer-75"></div>
-<div class="vertical-spacer-75"></div>            
+<div class="vertical-spacer-75"></div>  
+<script>
+    var input = document.getElementById('username');
+    input.focus();
+    input.select();
+</script>
 <% include ../partials/footer %>

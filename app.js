@@ -15,14 +15,17 @@ var fileUpload      = require("express-fileupload"),
 var PriceGroup      = require("./models/priceGroup"),
     Collection      = require("./models/collection"),
     Photo           = require("./models/photo"),
+    Price           = require("./models/price"),
     User            = require("./models/user");
 
 // Require Routes and Middleware
-var middleware          = require("./middleware"),
-    indexRoutes         = require("./routes/index"),
-    adminRoutes         = require("./routes/admin"),
-    adminGalleryRoutes  = require("./routes/adminGallery"),
-    adminPhotoRoutes    = require("./routes/adminPhoto");
+var middleware              = require("./middleware"),
+    indexRoutes             = require("./routes/index"),
+    adminRoutes             = require("./routes/admin"),
+    adminGalleryRoutes      = require("./routes/adminGallery"),
+    adminPhotoRoutes        = require("./routes/adminPhoto"),
+    adminPriceGroupRouters  = require("./routes/adminPriceGroups"),
+    adminPriceRouters       = require("./routes/adminPrice");
 
 
 // Application Config
@@ -53,6 +56,7 @@ passport.deserializeUser(User.deserializeUser());
 seedDB(); // */
 
 app.locals.galleryList = middleware.getGalleryList();
+app.locals.priceGroupList = middleware.getPriceGroupList();
 
 app.use(function(req, res, next){
    res.locals.currentUser = req.user;
@@ -65,6 +69,8 @@ app.use("/", indexRoutes);
 app.use("/admin", adminRoutes);
 app.use("/admin/gallery", adminGalleryRoutes);
 app.use("/admin/gallery/:galleryId/photos", adminPhotoRoutes);
+app.use("/admin/pricegroups", adminPriceGroupRouters);
+app.use("/admin/pricegroups/:priceGroupID/prices", adminPriceRouters);
 
 //catch all other requests
 app.get("*", function(req, res) {

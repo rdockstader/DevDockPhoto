@@ -1,0 +1,39 @@
+<% include ../../partials/header %>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>
+<div class="row text-centered">
+    <h2>Modify Price</h2>
+</div>
+<div class="row text-centered">
+    <form ref="updatePriceForm" id="updatePriceForm" method="POST" action="/admin/pricegroups/<%= priceGroupID %>/prices/<%= price._id %>?_method=PUT">
+        <div class="row">
+            <div class="col span-1-of-3">
+                <h4>Price Type</h4>
+            </div>
+            <div class="col span-2-of-3">
+                <input type="text" id="priceType" name="price[priceType]" value="<%= price.priceType %>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col span-1-of-3">
+                <h4>Time Frame</h4>
+            </div>
+            <div class="col span-2-of-3">
+                <input type="text" id="time" name="price[time]" value="<%= price.time %>">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col span-1-of-3">
+                <h4>Price</h4>
+            </div>
+            <div class="col span-2-of-3">
+                <input type="text" id="price" name="price[price]" value="<%= price.time %>">
+            </div>
+        </div>
+        <div class="vertical-spacer-75"></div>
+        <button type="submit" id="contact-submit" class="submit-button">Submit</button>
+    </form>
+</div>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>            
+<% include ../../partials/footer %>

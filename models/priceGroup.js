@@ -5,14 +5,11 @@ var priceGroupSchema = new mongoose.Schema({
     order: {type: Number},
     prices: [
         {
-            priceType: String,
-            time: String,
-            price: String
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Price"
         }
     ],
    addDate: {type: Date}
 });
 
 module.exports = mongoose.model("PriceGroup", priceGroupSchema);
-
-

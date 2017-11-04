@@ -1,0 +1,73 @@
+<% include ../../partials/header %>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>
+<div class="row text-centered">
+    <h2>Price Group Administration (<%if(!priceGroup){ %>None <% } else { %>  <%= priceGroup.title %> <% } %>)</h2>
+</div>
+<div class="row">
+    <div class="col span-1-of-4 text-centered">
+        <ul class="collections-list">
+            <li><a class="add-collection-btn" href="/admin/home">back</a></li>
+            <% priceGroupList.forEach(function(group) {  %>
+                <li><a class="collections-btn" href="/admin/pricegroups/<%= group %>"><%= group %></a></li>
+            <% }) %>
+            <li><a class="add-collection-btn" href="/admin/pricegroups/new">+</a></li>
+        </ul>
+    </div>
+    <div class="col span-3-of-4 text-centered">
+        <% if(!priceGroup){  %>
+        <h3>No Collection Seleted</h3>
+        <% } else { %>
+        <div class="row gallery-header">
+            <div class="col span-4-of-12">
+                <p><strong>Label</strong></p>
+            </div>
+            <div class="col span-4-of-12">
+                <p><strong>Time</strong></p>
+            </div>
+            <div class="col span-2-of-12">
+                <p><strong>Price</strong></p>
+            </div>
+        </div>
+        <% priceGroup.prices.forEach(function(price) {  %>
+        <div class="row">
+            <div class="col span-4-of-12">
+                <%= price.priceType %>
+            </div>
+            <div class="col span-4-of-12">
+                <%= price.time %>
+            </div>
+            <div class="col span-2-of-12">
+                <%= price.price %>
+            </div>
+            <div class="col span-1-of-12">
+                <a class="photo-update" href="/admin/pricegroups/<%= priceGroup._id %>/prices/<%= price._id %>"><i class="ion-android-document"></i></a>
+            </div>
+            <div class="col span-1-of-12">
+                <form action="/admin/pricegroups/<%= priceGroup._id %>/prices/<%= price._id %>?_method=DELETE" method="POST">
+                    <button class="photo-delete"><i class="ion-ios-trash"></i></button>
+                </form>
+            </div>
+        </div>
+        <% } ) } if(priceGroup){  %>
+        <div class="row align-right">
+            <div class="category-mod">
+                <div class="category-delete">
+                    <form id="delete" action="/admin/pricegroups/<%= priceGroup._id %>?_method=DELETE" method="POST">
+                        <button class="btn">Delete Price Group</button>
+                    </form>
+                </div> 
+                <div class="category-update">
+                    <a class="btn" href="/admin/pricegroups/<%= priceGroup._id %>/edit">Update Price Group</a>
+                </div>
+                <div class="photo-add">
+                    <a class="btn" href="/admin/pricegroups/<%= priceGroup._id %>/prices/new">Add Price</a>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
+<div class="vertical-spacer-75"></div>
+<div class="vertical-spacer-75"></div>            
+<% include ../../partials/footer %>
