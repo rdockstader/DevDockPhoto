@@ -2,8 +2,8 @@ var express         = require("express"),
     router          = express.Router(),
     fs              = require("fs"),
     middleware      = require("../middleware"),
-    Collection  = require("../models/collection"),
-    Photo       = require("../models/photo");
+    Collection      = require("../models/collection"),
+    Photo           = require("../models/photo");
     
 // Gallery Pages
 // ====================

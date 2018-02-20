@@ -82,7 +82,7 @@ router.delete("/:id", middleware.isLoggedIn, function(req, res){
                         console.log("ALERT: Price has not been removed from price group.");
                     }
                     group.save();
-                    res.redirct("/admin/pricegroups/" + group.label);
+                    res.redirect("/admin/pricegroups/" + group.label);
                 }
             });
         }

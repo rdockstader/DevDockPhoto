@@ -8,7 +8,7 @@ var fileUpload      = require("express-fileupload"),
     AWS             = require("aws-sdk"),
     express         = require("express"),
     //path            = require("path"),
-    fs              = require("fs"),
+    //fs              = require("fs"),
     app             = express();
     
 // Require Database Models    
@@ -25,7 +25,8 @@ var middleware              = require("./middleware"),
     adminGalleryRoutes      = require("./routes/adminGallery"),
     adminPhotoRoutes        = require("./routes/adminPhoto"),
     adminPriceGroupRouters  = require("./routes/adminPriceGroups"),
-    adminPriceRouters       = require("./routes/adminPrice");
+    adminPriceRouters       = require("./routes/adminPrice"),
+    adminAboutRouters       = require("./routes/adminAbout");
 
 
 // Application Config
@@ -71,6 +72,7 @@ app.use("/admin/gallery", adminGalleryRoutes);
 app.use("/admin/gallery/:galleryId/photos", adminPhotoRoutes);
 app.use("/admin/pricegroups", adminPriceGroupRouters);
 app.use("/admin/pricegroups/:priceGroupID/prices", adminPriceRouters);
+app.use("/admin/about", adminAboutRouters);
 
 //catch all other requests
 app.get("*", function(req, res) {
